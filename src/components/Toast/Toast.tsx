@@ -23,10 +23,17 @@ function Toast({ children, variant, onClose }: PropsWithChildren<Props>) {
       <div className={styles.iconContainer}>
         <ToastIcon size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
-      <button className={styles.closeButton} onClick={onClose}>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant} - </VisuallyHidden>
+        {children}
+      </p>
+      <button
+        className={styles.closeButton}
+        onClick={onClose}
+        aria-label="Dismiss message"
+        aria-live="off"
+      >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
