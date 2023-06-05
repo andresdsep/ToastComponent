@@ -1,18 +1,10 @@
 import React from 'react';
 import Toast from '../Toast';
+import { useToastContext } from '../ToastProvider';
 import styles from './ToastShelf.module.css';
-import { ToastSettings } from '../types';
 
-type Props = {
-  toasts: ToastSettings[];
-  setToasts: React.Dispatch<React.SetStateAction<ToastSettings[]>>;
-};
-
-function ToastShelf({ toasts, setToasts }: Props) {
-  const removeToast = (id: number) => {
-    const newToasts = toasts.filter((t) => t.id !== id);
-    setToasts(newToasts);
-  };
+function ToastShelf() {
+  const { toasts, removeToast } = useToastContext();
   return (
     <ol className={styles.wrapper}>
       {toasts.map(({ id, message, variant }) => (

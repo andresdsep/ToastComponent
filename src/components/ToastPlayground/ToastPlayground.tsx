@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import Button from '../Button';
+import { useToastContext } from '../ToastProvider';
 import ToastShelf from '../ToastShelf/ToastShelf';
-import { TOAST_VARIANT_OPTIONS, ToastSettings, ToastVariant } from '../types';
+import { TOAST_VARIANT_OPTIONS, ToastVariant } from '../types';
 import styles from './ToastPlayground.module.css';
 
 function ToastPlayground() {
   const [message, setMessage] = useState('');
   const [variant, setVariant] = useState<ToastVariant>('notice');
-  const [toasts, setToasts] = useState<ToastSettings[]>([]);
+  const { pushToast } = useToastContext();
 
-  const pushToast = (e: React.FormEvent<HTMLFormElement>) => {
+  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setToasts((curr) => [...curr, { id: Math.random(), message, variant }]);
+    pushToast(message, variant);
     setMessage('');
     setVariant('notice');
   };
@@ -23,9 +24,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toasts={toasts} setToasts={setToasts} />
+      <ToastShelf />
 
-      <form onSubmit={pushToast}>
+      <form onSubmit={formSubmit}>
         <div className={styles.controlsWrapper}>
           <div className={styles.row}>
             <label htmlFor="message" className={styles.label} style={{ alignSelf: 'baseline' }}>
