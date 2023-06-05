@@ -1,4 +1,11 @@
-import React, { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { ToastSettings, ToastVariant } from '../types';
 
 type ToastContextType = {
@@ -13,6 +20,16 @@ export const useToastContext = () => useContext(ToastContext);
 
 function ToastProvider({ children }: PropsWithChildren<{}>) {
   const [toasts, setToasts] = useState<ToastSettings[]>([]);
+
+  useEffect(() => {
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.code === 'Escape') {
+        setToasts([]);
+      }
+    };
+    document.addEventListener('keydown', onEscape);
+    return () => document.removeEventListener('keydown', onEscape);
+  });
 
   const value = useMemo(() => {
     const pushToast = (message: string, variant: ToastVariant) => {
