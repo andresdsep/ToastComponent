@@ -2,7 +2,7 @@
   "name": "toast-component",
   "version": "0.1.0",
   "private": true,
-  "author": "Josh Comeau <me@joshwcomeau.com>",
+  "author": "Andres Sepulveda",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -14,6 +14,11 @@
     "react-feather": "^2.0.10",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.35",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^4.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,6 +32,10 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true
   },
   "browserslist": {
     "production": [
